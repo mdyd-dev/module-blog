@@ -24,7 +24,7 @@ module.exports = class extends Generator {
   }
 
   end() {
-    console.log(chalk.green('MPP :: Blog :: Installing'));
-    console.log(chalk.green('MPP :: BlogModule :: Module files generated'));
+    console.log(chalk.green('Blog :: Installing'));
+    console.log(chalk.green('Blog :: Module files generated'));
   }
 };
