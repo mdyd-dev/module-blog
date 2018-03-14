@@ -1,0 +1,21 @@
+{
+  "name": "@platform-os/blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "repository": "mdyd-dev/module-blank-marketplace",
+  "author": "Paweł Kowalski <pavelloz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mdyd-dev/module-blog/issues"
+  },
+  "homepage": "https://github.com/mdyd-dev/module-blog#readme",
+  "devDependencies": {
+    "chalk": "^2.3.2",
+    "yeoman-environment": "^2.0.5",
+    "yeoman-generator": "^2.0.3"
+  }
+}

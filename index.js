@@ -1,7 +1,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const path = require('path');
-const targetPath = path.join(process.cwd(), 'marketplace_builder');
 
 const isEmpty = input => (input.length === 0 ? console.log(chalk.red('\nCant be empty')) : true);
 
@@ -21,14 +20,11 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath('.'), this.destinationPath(path.join(process.cwd())), this.props);
-  }
-
-  install() {
-    console.log(chalk.green('MPP :: Blog :: Installing'));
+    this.fs.copyTpl(this.templatePath('.'), this.destinationPath('../../..'), this.props);
   }
 
   end() {
+    console.log(chalk.green('MPP :: Blog :: Installing'));
     console.log(chalk.green('MPP :: BlogModule :: Module files generated'));
   }
 };
