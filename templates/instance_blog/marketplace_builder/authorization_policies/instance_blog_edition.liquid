@@ -1,5 +1,5 @@
 ---
 name: instance_blog_edition
-redirect_to: /
+redirect_to: ''
 ---
-{% if current_user and current_user.instance_admin? %}true{% endif %}
+{% if current_user and current_user.instance_admin? and current_user.admin? == false %}true{% endif %}

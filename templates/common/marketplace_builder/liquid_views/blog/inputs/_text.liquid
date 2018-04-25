@@ -46,7 +46,7 @@
     {% label @field_name, field_name: @field_name, form: @form_name, required: @is_required, label: @field_label, class: 'form-label' %}
   {% endif %}
 
-  {% input_field @field_name, field_name: @field_name, form: @form_name, as: @type, class: @input_classes, value: @value, pattern: @pattern, data-geolocation: @geolocation, placeholder: @placeholder, data-mask: @mask, required: @is_required, min: @min, max: @max, step: @step, disabled: @disabled %}
+  {% input_field @field_name, field_name: @field_name, form: @form_name, as: @type, class: @input_classes, value: @value, pattern: @pattern, data-geolocation: @geolocation, placeholder: @placeholder, data-mask: @mask, required: @is_required, min: @min, max: @max, step: @step, disabled: @disabled, rows: @rows | default: 2 %}
 
   {% if errors != blank %}
     <div class="form-control-feedback">

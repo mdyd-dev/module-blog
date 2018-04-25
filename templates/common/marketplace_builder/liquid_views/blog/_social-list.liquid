@@ -1,0 +1,39 @@
+<div class="o-widget">
+
+  {% if widget_title %}
+    <div class="o-widget__title">{{ widget_title }}</div>
+  {% endif %}
+
+  <div class="c-social-list o-list-inline">
+
+    {% if facebook_link %}
+      <a class="c-social-list__item o-icon-facebook" href="{{ facebook_link }}" target="_blank" rel="noopener">
+        <svg class="o-icon"><use xlink:href="#o-icon-facebook"></use></svg>
+      </a>
+    {% endif %}
+
+      {% if twitter_link %}
+        <a class="c-social-list__item o-icon-twitter" href="{{ twitter_link }}" target="_blank" rel="noopener">
+          <svg class="o-icon"><use xlink:href="#o-icon-twitter"></use></svg>
+        </a>
+    {% endif %}
+
+      {% if google_plus_link %}
+        <a class="c-social-list__item o-icon-google-plus" href="{{ google_plus_link }}" target="_blank" rel="noopener">
+          <svg class="o-icon">
+            <use xlink:href="#o-icon-google-plus"></use>
+          </svg>
+        </a>
+      {% endif %}
+
+      {% if rss_link %}
+        <a class="c-social-list__item o-icon-feed" href="{{ rss_link }}" target="_blank" rel="noopener">
+          <svg class="o-icon">
+            <use xlink:href="#o-icon-feed"></use>
+          </svg>
+        </a>
+    {% endif %}
+
+  </div>
+
+</div>

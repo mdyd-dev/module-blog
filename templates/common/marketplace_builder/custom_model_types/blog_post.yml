@@ -26,8 +26,8 @@ custom_attributes:
   searchable: false
   versions_configuration:
     normal:
-      width: 720
-      height: 300
+      width: 740
+      height: 460
       transform: :resize_to_fit
 - name: tags
   attribute_type: array
@@ -44,4 +44,9 @@ custom_attributes:
 - name: author_avatar
   attribute_type: photo
   public: true
+  versions_configuration:
+    thumb:
+      width: 100
+      height: 100
+      transform: :resize_to_fit
 ---

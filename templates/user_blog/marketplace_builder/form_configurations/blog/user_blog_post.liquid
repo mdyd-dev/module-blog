@@ -3,7 +3,7 @@ name: user_blog_post
 async_callback_actions:
   delay:
   content:
-base_form: CustomizationForm
+resource: Customization
 configuration:
   properties:
     title:
@@ -45,14 +45,17 @@ configuration:
           file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
         }
 default_payload: |-
-  {%- query_graph 'get_blog_instance', result_name: bi, scope: '<%= blog_scope %>', current_user_id: current_user.id -%}
-  {%- assign blog_instance = bi.customizations.results.first -%}
-  {
-    "properties_attributes": {
-      "blog_instance_id": "{{ blog_instance.id }}",
-      "slug": "{{ params.properties_attributes.title | default: '' | slugify }}"
+  {% if form %}
+    {%- query_graph 'get_blog_instance', result_name: bi, scope: 'user-blog', current_user_id: current_user.id -%}
+    {%- assign blog_instance = bi.customizations.results.first -%}
+    {
+      "properties_attributes": {
+        "blog_instance_id": "{{ blog_instance.id }}",
+        "slug": "{{ params.properties_attributes.title | default: '' | slugify }}"
+      }
     }
-  }
+  {% endif %}
+return_to: /user-blog/admin
 ---
 {%- if form.model.id -%}
   {% assign url = '/api/user/customizations/' | append: form.model.id %}
@@ -62,11 +65,8 @@ default_payload: |-
   {% assign method = 'POST' %}
 {%- endif -%}
 
-{% form_for form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-class: 'container', html-data-expert-signup-form:true  %}
-  <input value="{{ form_configuration.id }}" type="hidden" name="form_configuration_id" />
-  <input value="{{ page.id }}" type="hidden" name="page_id" />
+{% form_for form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-class: 'container'  %}
   <input value="{{ form.custom_model_type_id }}" type="hidden" name="custom_model_type_id" />
-  <input value="/<%= blog_scope %>/admin" data-action='Sign Up' type="hidden" name="return_to" />
 
   {% fields_for properties %}
     {% include 'blog/inputs/text', field_name: 'title', form_name: 'properties' %}
@@ -93,5 +93,5 @@ default_payload: |-
     {% endfields_for %}
   {% endfields_for %}
 
-  <div class="row"> {% submit 'submit', class: 'btn btn-primary btn-lg', data-disable-with: 'saving...' %}</div>
+  <div class="row"> {% submit 'Submit', class: 'btn btn-primary btn-lg', data-disable-with: 'saving...' %}</div>
 {% endform_for %}

@@ -3,12 +3,15 @@ name: blog_settings
 async_callback_actions:
   delay:
   content:
-base_form: CustomizationForm
+resource: Customization
 configuration:
   properties:
     title:
       validation:
         presence: true
+    subtitle:
+      validation:
+        presence: false
     slug:
       validation:
         presence: true
@@ -16,6 +19,12 @@ configuration:
       validation:
         presence: true
     enabled:
+      validation:
+        presence: false
+    sidebar_enabled:
+      validation:
+        presence: false
+    grid_view_enabled:
       validation:
         presence: false
     tags_filter:
@@ -30,12 +39,9 @@ configuration:
         validation: {
           file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
         }
-default_payload: |-
-  {
-    "properties_attributes": {
-      "slug": "{{ params.properties_attributes.title | default: '' | slugify }}"
-    }
-  }
+default_payload: ''
+flash_notice: Settings saved
+return_to: /blog/admin/settings
 ---
 {%- if form.model.id -%}
   {% assign url = '/api/user/customizations/' | append: form.model.id %}
@@ -45,27 +51,59 @@ default_payload: |-
   {% assign method = 'POST' %}
 {%- endif -%}
 
-{% form_for form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-class: 'container', html-data-expert-signup-form:true  %}
-  <input value="{{ form_configuration.id }}" type="hidden" name="form_configuration_id" />
-  <input value="{{ page.id }}" type="hidden" name="page_id" />
-  <input value="{{ form.custom_model_type_id }}" type="hidden" name="custom_model_type_id" />
-  <input value="{{ current_path | remove: '/settings'}}" data-action='Sign Up' type="hidden" name="return_to" />
 
-  {% fields_for properties %}
-    {% input_field 'scope', value: @scope, form: 'properties', as: 'hidden' %}
+{% form_for form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-data-expert-signup-form:true, html-class: 'pt-5 with-borders' %}
 
-    {% include 'blog/inputs/text', field_name: 'title', form_name: 'properties' %}
-    {% include 'blog/inputs/checkbox', field_name: 'enabled', form_name: 'properties', label: "Enabled" %}
-    {% include 'blog/inputs/text', field_name: 'tags_filter', form_name: 'properties' %}
-    {% include 'blog/inputs/text', field_name: 'facebook_app_id', form_name: 'properties' %}
-  {% endfields_for %}
+  {% if flash.notice %}
+    <div class="alert alert-success">
+      <span>{{ flash.notice }}</span>
+    </div>
+  {% endif %}
 
-  <br />
-  {% fields_for custom_images %}
-    {% fields_for header_image, form: custom_images %}
-      {% input image, as: image, form: header_image, hint: 'Please upload header image' %}
+  <div class="col-md-9 mb-3">
+    {% fields_for properties %}
+      <div class="row">
+        <div class="col-9">
+          {% include 'blog/inputs/text', field_name: 'title', form_name: 'properties' %}
+        </div>
+        <div class="col-2 pt-6" style="padding-top: 36px">
+          <span class="switch switch">
+            <input type="hidden" name="customization[properties_attributes][enabled]" value="0">
+            <input type="checkbox" class="switch" id="switch-normal" checked='checked' name="customization[properties_attributes][enabled]" id="customization_properties_attributes_published_at" value="1">
+            <label for="switch-normal">Enabled</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        {% input_field 'scope', value: @scope, form: 'properties', as: 'hidden' %}
+      </div>
+      <div class="row">
+        {% input_field 'slug', value: 'blog', form: 'properties', as: 'hidden' %}
+      </div>
+      {% include 'blog/inputs/text', field_name: 'subtitle', form_name: 'properties' %}
+      <div class='mt-3'>
+        {% include 'blog/inputs/checkbox', field_name: 'sidebar_enabled', form_name: 'properties', label: "Sidebar enabled (contains categories, related posts etc.)" %}
+      </div>
+      <div class='mt-3 mb-3'>
+        {% include 'blog/inputs/checkbox', field_name: 'grid_view_enabled', form_name: 'properties', label: "Grid view enabled (puts post information next to image)" %}
+      </div>
+      {% assign tags_filter = form.model.properties.tags_filter | join: ', ' %}
+      {% include 'blog/inputs/text', field_name: 'tags_filter', html-value: @tags_filter, form_name: 'properties', placeholder: "Tags separated with comma" %}
+      {% include 'blog/inputs/text', field_name: 'facebook_app_id', form_name: 'properties' %}
     {% endfields_for %}
-  {% endfields_for %}
 
-  <div class="row"> {% submit 'Submit', class: 'btn btn-primary btn-lg', data-disable-with: 'Saving...' %}</div>
+    <br />
+    {% fields_for custom_images, form: expert %}
+      {% fields_for header_image, form: custom_images %}
+        <div class="row">
+          {% input image, as: image, form: header_image %}
+        </div>
+      {% endfields_for %}
+    {% endfields_for %}
+
+    <div class="row mt-4">
+      {% submit 'Submit', class: 'btn btn-primary btn-lg', data-disable-with: 'Saving...' %}
+    </div>
+  </div>
 {% endform_for %}
