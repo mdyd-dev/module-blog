@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-instance-id="{{ platform_context.instance.id }}">
 <head>
-  {% include 'layouts/shared/csrf' %}
+  {% include 'layouts/blog/csrf' %}
   {% include 'layouts/admin-blog/stylesheets' %}
   {% yield 'head_content' %}
 </head>
@@ -13,7 +13,7 @@
     {{ content_for_layout }}
   </main>
 
-  {% include 'layouts/shared/cdn-url' %}
+  {% include 'layouts/blog/cdn-url' %}
   {% include 'layouts/admin-blog/javascripts' %}
 </body>
 </html>
