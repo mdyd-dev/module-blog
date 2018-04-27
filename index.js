@@ -2,6 +2,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const path = require('path');
 const targetPath = path.join(process.cwd(), 'marketplace_builder');
+const isEmpty = input => (input.length === 0 ? console.log(chalk.red('\nCant be empty')) : true);
 
 module.exports = class extends Generator {
   prompting() {
@@ -10,7 +11,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'blog_scope',
         message: 'Your blog url:',
-        default: 'new-blog'
+        default: 'blog'
       },
       {
         type: "list",
@@ -22,7 +23,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'layout_name',
         message: 'Your blog layout name:',
-        default: 'new-blog'
+        default: 'blog-layout'
       }
     ];
 
