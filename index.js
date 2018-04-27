@@ -17,7 +17,7 @@ module.exports = class extends Generator {
         type: "list",
         name: "blog_type",
         message: "Your blog type is:",
-        choices: [ "User Blog", "Instance Blog" ]
+        choices: ["Instance Blog", "User Blog" ]
       },
       {
         type: 'input',
