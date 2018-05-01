@@ -1,4 +1,3 @@
----
 name: Blog Instance
 custom_attributes:
 - name: title
@@ -20,29 +19,12 @@ custom_attributes:
 - name: tags_filter
   attribute_type: array
 - name: header_logo
-  label: Header Logo
   attribute_type: photo
-  html_tag: input
-  input_html_options: {}
-  search_in_query: false
-  searchable: false
 - name: header_icon
-  label: Header Icon
   attribute_type: photo
-  html_tag: input
-  input_html_options: {}
-  search_in_query: false
-  searchable: false
 - name: header_image
-  label: Header Image
   attribute_type: photo
-  html_tag: input
-  input_html_options: {}
-  search_in_query: false
-  searchable: false
   versions_configuration:
     normal:
       width: 740
       height: 300
-      transform: :resize_to_fit
----

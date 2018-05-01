@@ -1,5 +1,7 @@
 ---
 name: instance_blog_edition
-redirect_to: ''
+redirect_to: '<%= blog_scope %>'
+flash_alert: 'Please log in to access this page.'
 ---
-{% if current_user and current_user.instance_admin? and current_user.admin? == false %}true{% endif %}
+{% query_graph "current_user", result_name: g %}
+{% if g.current_user and g.current_user.is_instance_admin %}true{% endif %}
