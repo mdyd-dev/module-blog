@@ -6,7 +6,7 @@ query get_blog_user
     first_name
     email
 
-    admin_profile: profile(profile_type: "admin") {
+    admin_profile: profile(profile_type: "<%= admin_profile_name %>") {
       id
     }
   }
