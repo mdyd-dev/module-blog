@@ -1,0 +1,37 @@
+name: Blog Post
+custom_attributes:
+- name: title
+  attribute_type: string
+- name: content
+  attribute_type: text
+- name: excerpt
+  attribute_type: text
+- name: slug
+  attribute_type: string
+- name: published_at
+  attribute_type: datetime
+- name: hero_image
+  label: Hero Image
+  attribute_type: photo
+  html_tag: input
+  input_html_options: {}
+  search_in_query: false
+  searchable: false
+  versions_configuration:
+    normal:
+      width: 740
+      height: 460
+- name: tags
+  attribute_type: array
+- name: blog_instance_id
+  attribute_type: integer
+- name: author_name
+  attribute_type: string
+- name: author_biography
+  attribute_type: text
+- name: author_avatar
+  attribute_type: photo
+  versions_configuration:
+    thumb:
+      width: 100
+      height: 100

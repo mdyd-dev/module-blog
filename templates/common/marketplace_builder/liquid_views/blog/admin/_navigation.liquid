@@ -1,0 +1,12 @@
+<br>
+<ul class="nav nav-tabs mt-4">
+  <li class="nav-item">
+    <a class="nav-link  {% if current_full_path == '/<%= blog_scope %>/admin/settings' %}active{% endif %}" href="/<%= blog_scope %>/admin/settings">Settings</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if current_full_path == '/<%= blog_scope %>/admin' %}active{% endif %}" href="/<%= blog_scope %>/admin">Posts</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if current_full_path == '/<%= blog_scope %>/posts/new' %}active{% endif %}"  href="/<%= blog_scope %>/posts/new">New post</a>
+  </li>
+</ul>

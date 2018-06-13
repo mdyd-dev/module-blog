@@ -1,0 +1,60 @@
+---
+slug: '<%= blog_scope %>/admin'
+format: html
+layout_name: 'admin-<%= layout_name %>'
+authorization_policies:
+  - <%= blog_type == 'User Blog' ? 'user_blog_edition' : 'instance_blog_edition' %>
+---
+{% assign page = params.page | default: 1 | plus: 0 %}
+{% assign per_page = params.per_page  | default: 10 | plus: 0 %}
+{%- capture url_template -%}
+{% if params.language %}/{lang}{%- endif -%}/<%= blog_scope %>/admin/{slug}
+{%- endcapture -%}
+{% assign url_params = current_full_path | extract_url_params: url_template %}
+
+{%- query_graph 'get_blog_instance', result_name: bi, scope: '<%= blog_scope %>'<%= blog_type == 'User Blog' ? ', current_user_id: @current_user.id' : '' %> -%}
+{% assign blog_instance = bi.customizations.results.first %}
+
+{%- query_graph 'get_blog_posts', result_name: g, blog_instance_id: blog_instance.id, tags: params.tags -%}
+{% assign blog_posts = g.customizations %}
+
+{%- include 'blog/admin/navigation' -%}
+
+<section class="o-section blog-admin">
+  <div class="o-container">
+    <table class="table table-borderless pb-5">
+      <tr class="u-text-left">
+        <th>Title</th>
+        <th>Author</th>
+        <th>Published At</th>
+        <th>Actions</th>
+      </tr>
+      {% for blog_post in blog_posts.results %}
+        <tr>
+          <td><a href="/blog/post/{{ blog_instance.slug }}/{{ blog_post.slug }}">{{ blog_post.title }}</a></td>
+          <td>{{ blog_post.author_name }}</td>
+          <td>{{ blog_post.published_at | localize: 'long' }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/blog/posts/edit/{{blog_post.id}}" class='btn btn-link'>Edit</a>
+              {% render_form blog_post_delete,
+                object_class: Customization,
+                object_id: @blog_post.id,
+                parent_object_class: CustomModelType,
+                parent_object_id: blog_post
+              %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <div class="mt-5">
+      {%- include 'blog/pagination',
+        max_full_pagination: 6,
+        max_side_pagination: 2,
+        posts_per_page: per_page | minus: 1,
+        posts: blog_posts
+      -%}
+    </div>
+</section>

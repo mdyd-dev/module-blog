@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" data-instance-id="{{ platform_context.instance.id }}">
+<head>
+  {% include 'layouts/blog/csrf' %}
+  {% include 'layouts/admin-blog/stylesheets' %}
+  {% yield 'head_content' %}
+</head>
+
+<body class="admin-blog {% if is_logged_in %}logged-in{% endif %}">
+  {%- include 'layouts/admin-blog/header' -%}
+
+  <main>
+    {{ content_for_layout }}
+  </main>
+
+  {% include 'layouts/blog/cdn-url' %}
+  {% include 'layouts/admin-blog/javascripts' %}
+</body>
+</html>
