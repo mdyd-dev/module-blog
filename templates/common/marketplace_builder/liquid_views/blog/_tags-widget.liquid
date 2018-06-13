@@ -9,7 +9,7 @@
     {%- for tag in tags -%}
       <li class="c-tags-list__item">
 
-        <a class="c-tags-list__link" href="/blog/{{ slug }}/category/{{ tag | replace: ' ', '-' }}">
+        <a class="c-tags-list__link" href="/blog/{{ slug }}/category/{{ tag | parameterize }}">
           {{ tag }}
         </a>
 

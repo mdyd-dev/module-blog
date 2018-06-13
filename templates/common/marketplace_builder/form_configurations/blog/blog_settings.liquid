@@ -52,11 +52,11 @@ return_to: /blog/admin/settings
 {%- endif -%}
 
 
-{% form_for form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-data-expert-signup-form:true, html-class: 'pt-5 with-borders' %}
+{% form form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-data-expert-signup-form:true, html-class: 'pt-5 with-borders' %}
 
   {% if flash.notice %}
     <div class="alert alert-success">
-      <span>{{ flash.notice }}</span>
+      <span>{{ context.flash.notice }}</span>
     </div>
   {% endif %}
 
@@ -106,4 +106,4 @@ return_to: /blog/admin/settings
       {% submit 'Submit', class: 'btn btn-primary btn-lg', data-disable-with: 'Saving...' %}
     </div>
   </div>
-{% endform_for %}
+{% endform %}

@@ -1,6 +1,6 @@
 {%- capture post_href -%}/blog/post/{{ slug }}/{{ post_item.slug }}{%- endcapture -%}
 
-<article class="c-post{% if is_feature %} c-post--feature{% endif -%}">
+<article class="c-post{% if is_featured %} c-post--feature{% endif -%}">
 
   {%- if post_item.hero_image.transformed -%}
     <a class="c-post__picture-cont" href="{{ post_href }}">

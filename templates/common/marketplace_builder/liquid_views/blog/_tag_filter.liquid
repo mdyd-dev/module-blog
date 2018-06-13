@@ -16,5 +16,5 @@
     {% assign link_tags_encoded = link_tags | join: ',' | url_encode %}
     {% assign tag_query = "?tags=" | append: link_tags_encoded %}
   {%- endif -%}
-  <a href="{{ current_path }}{{ tag_query }}">{% if current_tags contains tag %}[X]{% endif %}{{ tag | capitalize }}</a>
+  <a href="{{ current_full_path }}{{ tag_query }}">{% if current_tags contains tag %}[X]{% endif %}{{ tag | capitalize }}</a>
 {%- endfor -%}

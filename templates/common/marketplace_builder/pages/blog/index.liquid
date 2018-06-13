@@ -1,6 +1,5 @@
 ---
 slug: '<%= blog_scope %>'
-format: html
 layout_name: '<%= layout_name %>'
 ---
 {%- capture url_template -%}
@@ -67,7 +66,7 @@ layout_name: '<%= layout_name %>'
           {% if blog_posts.results.size == 0 %}
             <div class="o-section__title">
               Sorry, no content matched your criteria.<br>
-              <a href="{{ current_path }}">Please go back to main blog page</a>
+              <a href="{{ current_full_path }}">Please go back to main blog page</a>
             </div>
           {% endif %}
 

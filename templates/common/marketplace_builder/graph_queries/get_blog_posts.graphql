@@ -12,70 +12,70 @@ query get_blog_posts(
   $blog_instance_id: String,
 )
 {
-	customizations (
+  customizations (
     is_deleted: false
-		per_page: $per_page
-		page: $page
-		id: $id
-		name: "blog_post"
+    per_page: $per_page
+    page: $page
+    id: $id
+    name: "blog_post"
     sort: [
       {
         name: "properties.published_at"
         order: "desc"
       }
     ]
-		properties: [
-			{
-				name: "tags"
-				values: $tags
+    properties: [
+      {
+        name: "tags"
+        values: $tags
         values_operator: OR
-			},
-			{
-				name: "blog_instance_id"
-				value: $blog_instance_id
-			},
-			{
-				name: "title"
-				value: $title
-			}
-			{
-				name: "slug"
-				value: $slug
-			}
-			{
-				name: "published_at"
-				range: {
+      },
+      {
+        name: "blog_instance_id"
+        value: $blog_instance_id
+      },
+      {
+        name: "title"
+        value: $title
+      }
+      {
+        name: "slug"
+        value: $slug
+      }
+      {
+        name: "published_at"
+        range: {
           lte: $published_at_lte
         }
-			}
-			{
-				name: "published_at"
-				range: {
+      }
+      {
+        name: "published_at"
+        range: {
           lt: $published_at_lt
         }
-			}
-			{
-				name: "published_at"
-				range: {
+      }
+      {
+        name: "published_at"
+        range: {
           gt: $published_at_gt
         }
-			}
-			{
-				name: "published_at"
-				range: {
+      }
+      {
+        name: "published_at"
+        range: {
           gte: $published_at_gte
         }
-			}
-		]
-	)
+      }
+    ]
+  )
   {
     current_page
     per_page
-		total_entries
-		total_pages
-		has_next_page
-		has_previous_page
-		results {
+    total_entries
+    total_pages
+    has_next_page
+    has_previous_page
+    results {
       id
       user {
         id
@@ -98,6 +98,6 @@ query get_blog_posts(
       author_avatar: custom_image(name: "author_avatar") {
         thumb: url(version: "thumb")
       }
-		}
-	}
+    }
+  }
 }

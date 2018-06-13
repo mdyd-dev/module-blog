@@ -13,14 +13,14 @@
   {% for post in posts %}
 
     {% if feature_first and forloop.first %}
-      {% assign is_feature_flag = true %}
+      {% assign is_featured_flag = true %}
     {% else %}
-      {% assign is_feature_flag = false %}
+      {% assign is_featured_flag = false %}
     {% endif %}
 
     {%- include 'blog/post',
       post_item: post,
-      is_feature: is_feature_flag,
+      is_featured: is_featured_flag,
       slug: instance_slug
     -%}
 
