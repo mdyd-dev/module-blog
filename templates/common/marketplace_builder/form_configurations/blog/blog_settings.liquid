@@ -43,17 +43,7 @@ default_payload: ''
 flash_notice: Settings saved
 return_to: /blog/admin/settings
 ---
-{%- if form.model.id -%}
-  {% assign url = '/api/user/customizations/' | append: form.model.id %}
-  {% assign method = 'PUT' %}
-{%- else -%}
-  {% assign url = '/api/user/customizations' %}
-  {% assign method = 'POST' %}
-{%- endif -%}
-
-
-{% form form, url: @url, multipart: true, as: customization, method: @method, html-novalidate: false, html-data-expert-signup-form:true, html-class: 'pt-5 with-borders' %}
-
+{% form form, multipart: true, as: customization, html-novalidate: false, html-data-expert-signup-form:true, html-class: 'pt-5 with-borders' %}
   {% if flash.notice %}
     <div class="alert alert-success">
       <span>{{ context.flash.notice }}</span>
@@ -66,7 +56,7 @@ return_to: /blog/admin/settings
         <div class="col-9">
           {% include 'blog/inputs/text', field_name: 'title', form_name: 'properties' %}
         </div>
-        <div class="col-2 pt-6" style="padding-top: 36px">
+        <div class="col-2" style="padding-top: 36px">
           <span class="switch switch">
             <input type="hidden" name="customization[properties_attributes][enabled]" value="0">
             <input type="checkbox" class="switch" id="switch-normal" checked='checked' name="customization[properties_attributes][enabled]" id="customization_properties_attributes_published_at" value="1">
@@ -88,7 +78,7 @@ return_to: /blog/admin/settings
       <div class='mt-3 mb-3'>
         {% include 'blog/inputs/checkbox', field_name: 'grid_view_enabled', form_name: 'properties', label: "Grid view enabled (puts post information next to image)" %}
       </div>
-      {% assign tags_filter = form.model.properties.tags_filter | join: ', ' %}
+      {% assign tags_filter = form.properties.tags_filter | join: ', ' %}
       {% include 'blog/inputs/text', field_name: 'tags_filter', html-value: @tags_filter, form_name: 'properties', placeholder: "Tags separated with comma" %}
       {% include 'blog/inputs/text', field_name: 'facebook_app_id', form_name: 'properties' %}
     {% endfields_for %}

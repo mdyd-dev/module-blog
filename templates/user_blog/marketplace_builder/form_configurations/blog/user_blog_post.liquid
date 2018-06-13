@@ -57,8 +57,8 @@ default_payload: |-
   {% endif %}
 return_to: /user-blog/admin
 ---
-{%- if form.model.id -%}
-  {% assign url = '/api/user/customizations/' | append: form.model.id %}
+{%- if form.id -%}
+  {% assign url = '/api/user/customizations/' | append: form.id %}
   {% assign method = 'PUT' %}
 {%- else -%}
   {% assign url = '/api/user/customizations' %}

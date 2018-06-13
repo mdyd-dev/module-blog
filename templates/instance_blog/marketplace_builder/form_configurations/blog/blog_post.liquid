@@ -57,8 +57,8 @@ default_payload: |-
     }
   {% endif %}
 ---
-{%- if form.model.id -%}
-  {% assign url = '/api/user/customizations/' | append: form.model.id %}
+{%- if form.id -%}
+  {% assign url = '/api/user/customizations/' | append: form.id %}
   {% assign method = 'PUT' %}
 {%- else -%}
   {% assign url = '/api/user/customizations' %}
@@ -91,7 +91,7 @@ default_payload: |-
 
         <div class="col"  style="padding-top:36px">
           <span class="switch switch">
-            {% assign published_at = form.model.properties.published_at | date: '%s' %}
+            {% assign published_at = form.properties.published_at | date: '%s' %}
             {% assign now_in_miliseconds = 'now' | date: '%s' %}
             <input type="checkbox" class="switch" id="switch-normal" {% if now_in_miliseconds > published_at %}checked='checked'{% endif %} name="customization[properties_attributes][published_at]" id="customization_properties_attributes_published_at" value="{{ 'now' | date: '%d/%m/%Y' }}">
             <label for="switch-normal">Publish Now</label>
@@ -104,7 +104,7 @@ default_payload: |-
       </div>
 
       {% include 'blog/inputs/text', field_name: 'excerpt', form_name: 'properties', as_type: 'text', rows: "5" %}
-      {% assign tags = form.model.properties.tags | join: ', ' %}
+      {% assign tags = form.properties.tags | join: ', ' %}
       {% include 'blog/inputs/text', field_name: 'tags', html-value: @tags, form_name: 'properties', placeholder: "Tags separated with comma" %}
     {% endfields_for %}
 
