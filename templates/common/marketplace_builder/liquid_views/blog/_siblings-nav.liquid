@@ -13,7 +13,7 @@
       {{ previous_post.title }}
 
     </a>
-  {% endif%}
+  {% endif %}
 
   {%- query_graph 'get_blog_posts', result_name: next_post_query, published_at_gt: blog_post.published_at, published_at_lte: today, blog_instance_id: blog_post.blog_instance_id -%}
   {% assign next_post = next_post_query.customizations.results.last %}
