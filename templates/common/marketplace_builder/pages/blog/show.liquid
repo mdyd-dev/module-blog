@@ -3,6 +3,7 @@ slug: '<%= blog_scope %>/post'
 format: html
 layout_name: '<%= layout_name %>'
 ---
+{% assign url = "https://" | append: context.location.host | append: context.location.href %}
 
 {%- capture url_template -%}
 {% if params.language %}/{lang}{%- endif -%}/<%= blog_scope %>/post/{blog_slug}/{post_slug}
@@ -53,7 +54,7 @@ layout_name: '<%= layout_name %>'
               {% include 'blog/share-list',
                 title: 'Share this article',
                 text:  blog_post.title,
-                page_url: current_url
+                page_url: url
               %}
 
               {%- include 'blog/topics',
@@ -74,7 +75,7 @@ layout_name: '<%= layout_name %>'
           {%- include 'blog/siblings-nav' -%}
 
           {%- include 'blog/comments',
-            page_url: current_url
+            page_url: url
           -%}
 
         </div>
