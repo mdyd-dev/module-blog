@@ -20,6 +20,13 @@ module.exports = class extends Generator {
         choices: ["Instance Blog", "User Blog" ]
       },
       {
+        when: function(props) { return (/Instance Blog/i).test(props.blog_type); },
+        type: 'input',
+        name: 'admin_profile_name',
+        default: 'admin',
+        message: 'Please provide name of instance profile type that is allowed to access admin part of the blog:'
+      },
+      {
         type: 'input',
         name: 'layout_name',
         message: 'Your blog layout name:',
