@@ -1,7 +1,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const path = require('path');
-const targetPath = path.join(process.cwd(), '../../marketplace_builder');
+const targetPath = path.join(process.cwd(), '../../../marketplace_builder');
 const isEmpty = input => (input.length === 0 ? console.log(chalk.red('\nCant be empty')) : true);
 
 module.exports = class extends Generator {
@@ -40,7 +40,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath(".") + '/common', this.destinationPath('../..'), this.props);
+    this.fs.copyTpl(this.templatePath(".") + '/common', this.destinationPath('../../..'), this.props);
 
     this.fs.move(targetPath + '/views/layouts/blog.liquid',
       targetPath + '/views/layouts/' + this.props.layout_name + '.liquid')
@@ -52,9 +52,9 @@ module.exports = class extends Generator {
     }
 
     if (this.props.blog_type == 'User Blog') {
-      this.fs.copyTpl(this.templatePath(".") + '/user_blog', this.destinationPath('../..'), this.props);
+      this.fs.copyTpl(this.templatePath(".") + '/user_blog', this.destinationPath('../../..'), this.props);
     } else {
-      this.fs.copyTpl(this.templatePath(".") + '/instance_blog', this.destinationPath('../..'), this.props);
+      this.fs.copyTpl(this.templatePath(".") + '/instance_blog', this.destinationPath('../../..'), this.props);
     }
   }
 
