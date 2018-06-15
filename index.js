@@ -10,7 +10,7 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'blog_scope',
-        message: 'Your blog url:',
+        message: 'Your blog path:',
         default: 'blog'
       },
       {
