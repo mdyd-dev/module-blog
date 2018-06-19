@@ -10,7 +10,7 @@ Before starting to install the Blog Module, make sure you have:
 
 To install the Blog Module, go to the root directory of your codebase (e.g. `marketplace-example`) and enter the following command in the command-line application of your choice: 
 
-`npm i  @platform-os/blog`
+`npm i --no-save @platform-os/blog`
 
 The installer starts and asks you the following:
 
@@ -32,3 +32,4 @@ Deploy your Instance with the `--force` flag, for example:
 Go to [your-Instance-URL]/blog/admin/settings. Enter a title for your blog, and make sure the `Enable` button is turned on. Save your changes. 
 
 You can now see your blog at [your-Instance-URL]/blog.
+
