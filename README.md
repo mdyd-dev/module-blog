@@ -2,4 +2,4 @@
 
 Go to your marketplace root directory (ie. `marketplace-example`) and install module:
 
-    npm i @platform-os/blog
+    npm i @platform-os/blog --no-save
